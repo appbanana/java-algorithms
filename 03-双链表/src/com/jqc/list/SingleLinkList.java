@@ -1,9 +1,10 @@
 package com.jqc.list;
 
+
 /**
  *  单链表
  */
-public class SingleList<E> extends AbstractList<E>{
+public class SingleLinkList<E> extends AbstractList<E>{
 
     // 首结点
     private Node first;
@@ -23,13 +24,25 @@ public class SingleList<E> extends AbstractList<E>{
             this.element = element;
             this.next = next;
         }
+
+        @Override
+        public String toString() {
+            StringBuilder string = new StringBuilder();
+            string.append(element + "_");
+            if (next == null) {
+                string.append("null");
+            }else {
+                string.append(next.element);
+            }
+            return string.toString();
+        }
     }
 
 
     /**
      * 构造器方法
      */
-    public SingleList() {
+    public SingleLinkList() {
         super();
     }
 
@@ -139,11 +152,13 @@ public class SingleList<E> extends AbstractList<E>{
     public String toString() {
         StringBuilder string =  new StringBuilder();
         string.append("size = ").append(size).append(", ");
+        Node<E> node = first;
         for (int i = 0; i < size; i++) {
             if (i != 0) {
-                string.append("_");
+                string.append(", ");
             }
-            string.append(node(i).element);
+            string.append(node);
+            node = node.next;
         }
 
         return string.toString();

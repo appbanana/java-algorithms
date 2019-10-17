@@ -1,15 +1,14 @@
 package com.jqc.list;
 
+import com.jqc.circle.CircleSingleLinkList;
+
 /**
  *  单链表
  */
-public class SingleList<E> {
-    // 记录大小
-    private int size = 0;
+public class SingleLinkList<E> extends AbstractList<E>{
+
     // 首结点
     private Node first;
-    // 元素找不到的标志
-    private static final int ELEMENT_NOT_FOUND = -1;
 
     private static class Node<E> {
         // node的当前元素
@@ -26,52 +25,32 @@ public class SingleList<E> {
             this.element = element;
             this.next = next;
         }
+
+        @Override
+        public String toString() {
+            StringBuilder string = new StringBuilder();
+            string.append(element + "_");
+            if (next == null) {
+                string.append("null");
+            }else {
+                string.append(next.element);
+            }
+            return string.toString();
+        }
     }
 
 
     /**
      * 构造器方法
      */
-    public SingleList() {
+    public SingleLinkList() {
         super();
     }
 
-    /**
-     *
-     * @return 返回链表长度
-     */
-    public int size() {
-        return size;
-    }
 
     public void clear() {
         first = null;
         size = 0;
-    }
-
-    /**
-     * 检验链表是否为空
-     * @return bool
-     */
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    /**
-     * 是否包含某个元素
-     * @param element
-     * @return
-     */
-    public boolean contain(E element) {
-        return indexOf(element) != ELEMENT_NOT_FOUND;
-    }
-
-    /**
-     * 添加元素
-     * @param element
-     */
-    public void add(E element) {
-        add(size, element);
     }
 
     /**
@@ -114,6 +93,7 @@ public class SingleList<E> {
      * @param element 要查找的元素
      * @return 返回该元素的索引
      */
+    @Override
     public int indexOf(E element) {
         if (element == null) {
             Node<E> node = first;
@@ -166,46 +146,20 @@ public class SingleList<E> {
         }
         return node;
     }
-    /**
-     * 索引检测
-     * @param index
-     */
-    private void rangeCheck(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
-        }
-    }
 
-    /**
-     * 添加索引检测
-     * @param index
-     */
-    private void addRangeCheck(int index) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("add index out of bounds");
-        }
-    }
-
-    /**
-     * 元素是否为空的检测
-     * @param element 元素
-     */
-    private void elementNotNullCheck(E element) {
-        if (element == null) {
-            throw new IllegalArgumentException("element must be not null");
-        }
-    }
 
 
     @Override
     public String toString() {
         StringBuilder string =  new StringBuilder();
         string.append("size = ").append(size).append(", ");
+        Node<E> node = first;
         for (int i = 0; i < size; i++) {
             if (i != 0) {
-                string.append("_");
+                string.append(", ");
             }
-            string.append(node(i).element);
+            string.append(node);
+            node = node.next;
         }
 
         return string.toString();
