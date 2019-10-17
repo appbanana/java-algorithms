@@ -59,7 +59,7 @@ public class ArrayList<E> {
      * @return
      */
     public boolean contain(E element) {
-        return indexof(element) != ELEMENT_NOT_FOUND;
+        return indexOf(element) != ELEMENT_NOT_FOUND;
     }
 
     /**
@@ -78,8 +78,8 @@ public class ArrayList<E> {
     public void add(int index, E element) {
         addRangeCheck(index);
         ensureCapacity(size + 1);
-        for (int i = index; i < size; i++) {
-            elements[size] = elements[size - 1];
+        for (int i = size; i > index; i--) {
+            elements[i] = elements[i - 1];
         }
         elements[index] = element;
         size++;
@@ -93,10 +93,10 @@ public class ArrayList<E> {
     public E remove(int index) {
         rangeCheck(index);
         E old = elements[index];
-        for (int i = index; i < size; i++) {
-            elements[index] = elements[index + 1];
+        for (int i = index + 1; i < size; i++) {
+            elements[i - 1] = elements[i];
         }
-        elements[size--] = null;
+        elements[--size] = null;
         return old;
     }
 
@@ -105,7 +105,7 @@ public class ArrayList<E> {
      * @param element 要查找的元素
      * @return
      */
-    public int indexof(E element) {
+    public int indexOf(E element) {
 //        for (int i = 0; i < size; i++) {
 //            if (elements[i] == element) {
 //                return i;

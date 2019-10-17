@@ -1,15 +1,12 @@
-package com.jqc;
+package com.jqc.list;
 
 /**
  * 扩展为泛型, 可以存放任意类型的数组 模拟jdk1.8中中的动态数组(ArrayList)
  */
-public class ArrayList<E> {
-    // 记录动态数组大小
-    private int size = 0;
+public class ArrayList<E> extends AbstractList<E> {
+
     // 动态数组默认申请内存空间
     private static final int DEFAULT_CAPACITY = 5;
-    // 元素找不到的标志
-    private static final int ELEMENT_NOT_FOUND = -1;
 
     // 数组容器
     private E[] elements;
@@ -30,44 +27,12 @@ public class ArrayList<E> {
 
     }
 
-    /**
-     * 返回数组的长度
-     * @return
-     */
-    public int size() {
-        return size;
-    }
 
     public void clear() {
         for (int i = 0; i < size; i++) {
             elements[i] = null;
         }
         size = 0;
-    }
-
-    /**
-     * 数组是否为空
-     * @return
-     */
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    /**
-     * 是否包含某个元素
-     * @param element
-     * @return
-     */
-    public boolean contain(E element) {
-        return indexof(element) != ELEMENT_NOT_FOUND;
-    }
-
-    /**
-     * 添加元素
-     * @param element
-     */
-    public void add(E element) {
-        add(size, element);
     }
 
     /**
@@ -78,8 +43,8 @@ public class ArrayList<E> {
     public void add(int index, E element) {
         addRangeCheck(index);
         ensureCapacity(size + 1);
-        for (int i = index; i < size; i++) {
-            elements[size] = elements[size - 1];
+        for (int i = size; i > index; i--) {
+            elements[i] = elements[i - 1];
         }
         elements[index] = element;
         size++;
@@ -93,10 +58,10 @@ public class ArrayList<E> {
     public E remove(int index) {
         rangeCheck(index);
         E old = elements[index];
-        for (int i = index; i < size; i++) {
-            elements[index] = elements[index + 1];
+        for (int i = index + 1; i < size; i++) {
+            elements[i - 1] = elements[i];
         }
-        elements[size--] = null;
+        elements[--size] = null;
         return old;
     }
 
@@ -105,14 +70,9 @@ public class ArrayList<E> {
      * @param element 要查找的元素
      * @return
      */
-    public int indexof(E element) {
-//        for (int i = 0; i < size; i++) {
-//            if (elements[i] == element) {
-//                return i;
-//            }
-//        }
-//        return ELEMENT_NOT_FOUND;
 
+    @Override
+    public int indexOf(E element) {
         // 扩展为泛型后 需要对下面的代码进行改进
         if (element == null) {
             // 空进入该方法
@@ -152,25 +112,6 @@ public class ArrayList<E> {
         return old;
     }
 
-    /**
-     * 索引检测
-     * @param index
-     */
-    private void rangeCheck(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
-        }
-    }
-
-    /**
-     * 添加索引检测
-     * @param index
-     */
-    private void addRangeCheck(int index) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("index out of bounds");
-        }
-    }
 
     /**
      * 扩容
