@@ -142,7 +142,7 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
                 node.parent.right = replaceNode;
             }
             // 删除之后 AVL去处理后续操作
-            afterRemove(replaceNode);
+            afterRemove(node);
         }else if (node.parent == null) {
             // 删除的是根节点, 而且根节点没有子节点
             root = null;
