@@ -1,5 +1,7 @@
 package com.jqc.map;
 
+import com.jqc.printer.BinaryTreeInfo;
+import com.jqc.printer.BinaryTrees;
 import com.jqc.tree.BinaryTree;
 
 import java.util.Comparator;
@@ -120,6 +122,33 @@ public class TreeMap<K, V> implements Map<K, V> {
         return false;
     }
 
+    public void print(){
+        if (root == null || size == 0) return;
+        BinaryTrees.println(new BinaryTreeInfo() {
+            @Override
+            public Object root() {
+                return root;
+            }
+
+            @Override
+            public Object left(Object node) {
+                return ((Node<K, V>)node).left;
+            }
+
+            @Override
+            public Object right(Object node) {
+                return ((Node<K, V>)node).right;
+            }
+
+            @Override
+            public Object string(Object node) {
+                return node;
+            }
+        });
+
+    }
+
+
     /**
      * 中序遍历作用 有序输出
      * @param visitor
@@ -171,8 +200,8 @@ public class TreeMap<K, V> implements Map<K, V> {
         if (node.hasTwoChildren()) {
             // 删除的节点的度为2
             Node<K, V> s = successor(node);
-            s.key = node.key;
-            s.value = node.value;
+            node.key = s.key;
+            node.value = s.value;
             node = s;
         }
 
@@ -194,7 +223,6 @@ public class TreeMap<K, V> implements Map<K, V> {
             afterRemove(replacement);
         }else if (node.parent == null) {
             root = null;
-            afterRemove(root);
         }else {
             // node是叶子节点，但不是根节点
             if (node == node.parent.left) {
@@ -469,10 +497,6 @@ public class TreeMap<K, V> implements Map<K, V> {
         // 更新grand的父节点
         grand.parent = parent;
 
-//        // 先更新较低节点的高度
-//        updateHeight(grand);
-//        // 在更新较高节点的高度
-//        updateHeight(parent);
     }
 
 

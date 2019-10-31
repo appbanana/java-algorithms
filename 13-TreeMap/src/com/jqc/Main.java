@@ -5,22 +5,24 @@ import com.jqc.map.Map;
 import com.jqc.map.TreeMap;
 
 import com.jqc.map.Map.Visitor;
+import com.jqc.tools.Asserts;
 
 public class Main {
 
     public static void main(String[] args) {
-        test1();
+//        test1();
 
-//        test2();
+        test2();
+
     }
 
     static void test1() {
-        Map<String, Integer> map = new TreeMap<>();
+        TreeMap<String, Integer> map = new TreeMap<>();
         map.put("c", 2);
         map.put("a", 5);
         map.put("b", 6);
         map.put("a", 8);
-
+        map.print();
         map.traversal(new Visitor<String, Integer>() {
             public boolean visit(String key, Integer value) {
                 System.out.println(key + "_" + value);
@@ -42,7 +44,7 @@ public class Main {
 
     static void test2() {
 
-        FileInfo fileInfo = Files.read("/Users/JQC/Desktop/src",
+        FileInfo fileInfo = Files.read("/Users/JQC/Desktop/src/java/util",
                 new String[]{"java"});
 
         System.out.println("文件数量：" + fileInfo.getFiles());
@@ -57,16 +59,19 @@ public class Main {
             map.put(words[i], count);
         }
 
-        for (int i = 0; i < words.length; i++) {
-            map.containsKey(words[i]);
+
+        int count = 0;
+        for (String word : words) {
+            Integer i = map.get(word);
+            count += i == null ? 0 : i;
+            map.remove(word);
         }
+        System.out.println(count + ", " + words.length);
+        System.out.println(map.size());
 
+        Asserts.test(count == words.length);
+        Asserts.test(map.size() == 0);
 
-//        map.traversal(new Visitor<String, Integer>() {
-//            public boolean visit(String key, Integer value) {
-//                System.out.println(key + "_" + value);
-//                return false;
-//            }
-//        });
     }
+
 }
