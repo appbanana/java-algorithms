@@ -7,7 +7,7 @@ data-structure1 是自己一步步实现的过程,记录下来,方便自己以�
 data-structure是在data-structure1整理过后的代码, 整体上没有差别
 
 ### data-structure目录结构
-![avatar](https://github.com/appbanana/java-algorithms/blob/master/1.png)
+![image](https://github.com/appbanana/java-algorithms/blob/master/1.png)
 
 
 
