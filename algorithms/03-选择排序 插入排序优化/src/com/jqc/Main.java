@@ -15,15 +15,16 @@ public class Main {
 //        System.out.println(BinarySearch.indexOf(array1, 11));
 
 
+
         testSort(array,
-                new BubbleSort1<Integer>(),
-                new BubbleSort2<Integer>(),
-                new BubbleSort3<Integer>(),
-                new SelectionSort<Integer>(),
-                new HeapSort<Integer>(),
-                new InsertionSort1<Integer>(),
-                new InsertionSort2<Integer>(),
-                new InsertionSort3<Integer>()
+                new BubbleSort1(),
+                new BubbleSort2(),
+                new BubbleSort3(),
+                new SelectionSort(),
+                new HeapSort(),
+                new InsertionSort1(),
+                new InsertionSort2(),
+                new InsertionSort3()
         );
 
 

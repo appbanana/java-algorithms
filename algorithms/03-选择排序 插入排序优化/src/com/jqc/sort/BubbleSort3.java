@@ -4,7 +4,7 @@ package com.jqc.sort;
  * @author appbanana
  * @date 2019/11/6
  */
-public class BubbleSort3<T extends Comparable<T>> extends Sort<T> {
+public class BubbleSort3 extends Sort {
 
 //     冒泡排序 针对部分有序优化
 //    @Override

@@ -4,7 +4,7 @@ package com.jqc.sort;
  * @author appbanana
  * @date 2019/11/6
  */
-public class HeapSort<T extends Comparable<T>> extends Sort<T> {
+public class HeapSort extends Sort {
 
     private int heapSize;
 
@@ -25,11 +25,11 @@ public class HeapSort<T extends Comparable<T>> extends Sort<T> {
     }
 
     private void siftDown(int index) {
-        T element = array[index];
+        Integer element = array[index];
         int half = heapSize >> 1;
         while (index < half) {
             int childIndex = (index << 1) + 1;
-            T child = array[childIndex];
+            int child = array[childIndex];
 
             if (childIndex + 1 < heapSize && cmp(childIndex, childIndex + 1) < 0) {
                 // 左子节点值小于右子节点的值

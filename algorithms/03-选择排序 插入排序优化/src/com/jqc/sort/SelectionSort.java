@@ -4,7 +4,7 @@ package com.jqc.sort;
  * @author appbanana
  * @date 2019/11/6
  */
-public class SelectionSort<T extends Comparable<T>> extends Sort<T> {
+public class SelectionSort extends Sort {
     @Override
     protected void sort() {
         // 循环次数

@@ -6,9 +6,9 @@ import java.text.DecimalFormat;
  * @author appbanana
  * @date 2019/11/6
  */
-public abstract class Sort<T extends Comparable<T>> implements Comparable<Sort<T>>{
+public abstract class Sort implements Comparable<Sort>{
     //
-    protected T[] array;
+    protected Integer[] array;
     // 记录排序所花时间
     private long time;
     // 元素交换次数
@@ -18,7 +18,7 @@ public abstract class Sort<T extends Comparable<T>> implements Comparable<Sort<T
 
     private DecimalFormat fmt = new DecimalFormat("#.00");
 
-    public void sort(T[] array) {
+    public void sort(Integer[] array) {
         this.array = array;
         long begin = System.currentTimeMillis();
         sort();
@@ -47,7 +47,7 @@ public abstract class Sort<T extends Comparable<T>> implements Comparable<Sort<T
      */
     protected void swap(int index1, int index2) {
         swapCount++;
-        T temp = array[index1];
+        int temp = array[index1];
         array[index1] = array[index2];
         array[index2] = temp;
     }
@@ -60,7 +60,7 @@ public abstract class Sort<T extends Comparable<T>> implements Comparable<Sort<T
      */
     protected int cmp(int index1, int index2) {
         cmpCount++;
-        return array[index1].compareTo(array[index2]);
+        return array[index1] - array[index2];
     }
 
     /**
@@ -69,9 +69,9 @@ public abstract class Sort<T extends Comparable<T>> implements Comparable<Sort<T
      * @param e2 元素2
      * @return
      */
-    protected int cmpElement(T e1, T e2) {
+    protected int cmpElement(int e1, int e2) {
         cmpCount++;
-        return e1.compareTo(e2);
+        return e1 - e2;
     }
 
     @Override
