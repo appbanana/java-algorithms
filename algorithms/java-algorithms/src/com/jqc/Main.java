@@ -1,52 +1,56 @@
 package com.jqc;
-
-import com.jqc.sort.*;
 import com.jqc.tools.Asserts;
-import com.jqc.tools.Integers;
+import com.jqc.tools.Times;
+import com.jqc.union.*;
 
-import java.util.Arrays;
 
 public class Main {
+    static final int count = 10_0000;
+//    static final int count = 100;
 
     public static void main(String[] args) {
-        Integer[] array = Integers.random(10000, 0, 10000);
-
-//        Integer[] array1 = {1, 5, 18, 9, 10, 12};
-////        System.out.println(BinarySearch.indexOf(array1, 11));
-//        ShellSort<Integer> shellSort = new ShellSort<>();
-//        shellSort.sort(array1);
-
-//        Integer[] array1 = {1, 5, 18, 9, 100, 12};
-//        RadixSort sort2 = new RadixSort();
-//        sort2.sort(array1);
-//        System.out.println(Arrays.toString(array1));
-
-
-        testSort(array,
-                new BubbleSort3<Integer>(),
-                new SelectionSort<Integer>(),
-                new HeapSort<Integer>(),
-                new InsertionSort3<Integer>(),
-                new QuickSort<Integer>(),
-                new MergeSort<Integer>(),
-                new CountingSort(),
-                new RadixSort()
-        );
-
-
-
+        testUnionFind(new UnionFind_QF(count));
+        testUnionFind(new UnionFind_QU(count));
+        testUnionFind(new UnionFind_QU_S(count));
+        testUnionFind(new UnionFind_QU_R(count));
+//        testUnionFind(new UnionFind_QU_R_PC(count));  // 这个太慢了
+        testUnionFind(new UnionFind_QU_R_PS(count));
+        testUnionFind(new UnionFind_QU_R_PH(count));
     }
 
-    static void testSort(Integer[] array, Sort... sorts) {
-        for (Sort sort : sorts) {
-            Integer[] newArray = Integers.copy(array);
-            sort.sort(newArray);
-            Asserts.test(Integers.isAscOrder(newArray));
-        }
-        Arrays.sort(sorts);
-        for (Sort sort : sorts) {
-            System.out.println(sort);
-        }
+    /**
+     * 测试并查集 测试数据详见img/01-union_find.jpg图片
+     * @param uf
+     */
+    static void testUnionFind(UnionFind uf) {
+        uf.union(0, 1);
+        uf.union(0, 3);
+        uf.union(0, 4);
+        uf.union(2, 3);
+        uf.union(2, 5);
+
+        uf.union(6, 7);
+
+        uf.union(8, 9);
+        uf.union(8, 10);
+        uf.union(9, 11);
+
+        Asserts.test(!uf.isSame(2, 7));
+
+        uf.union(2, 7);
+        Asserts.test(uf.isSame(2, 7));
+
+        Times.test(uf.getClass().getSimpleName(), ()-> {
+            for (int i = 0; i < count; i++) {
+                uf.union((int)(Math.random() * count),
+                        (int)(Math.random() * count));
+            }
+
+            for (int i = 0; i < count; i++) {
+                uf.isSame((int)(Math.random() * count),
+                        (int)(Math.random() * count));
+            }
+        });
 
     }
 
