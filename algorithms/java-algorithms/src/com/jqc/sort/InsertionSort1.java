@@ -6,17 +6,21 @@ package com.jqc.sort;
  */
 
 public class InsertionSort1<T extends Comparable<T>> extends Sort<T> {
+
     /**
-     * 插入排序 思路：假设第一个先排好序， 如果后面的比前面的元素大，就交换位置
+     * 思路: 前面的已经排好序, 后面插入的依次和前面的元素比较 如果比前面的元素小 交换位置
      */
     @Override
     protected void sort() {
+
         for (int begin = 1; begin < array.length; begin++) {
-            int curr =begin;
+            int curr = begin;
             while (curr > 0 && cmp(curr, curr - 1) < 0) {
-                swap(curr - 1, curr);
+                // 如果当前元素比前一个元素小 交换位置
+                swap(curr, curr - 1);
                 curr--;
             }
         }
     }
+
 }

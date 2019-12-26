@@ -6,7 +6,7 @@ package com.jqc.sort;
  */
 public class BubbleSort1<T extends Comparable<T>> extends Sort<T> {
 
-    // 冒泡排序的思路(升序): 如果后一个元素比前一个小,就交换顺序
+    // 思路:相邻两个元素比较, 如果前一个比后一个元素大,则交换位置(升序情况)
 //    @Override
 //    protected void sort() {
 //        for (int end = array.length - 1; end > 0; end--) {
@@ -21,7 +21,7 @@ public class BubbleSort1<T extends Comparable<T>> extends Sort<T> {
 //        }
 //    }
 
-    // 冒泡排序的思路(升序): 如果后一个元素比前一个小,就交换顺序
+    // 思路:相邻两个元素比较, 如果前一个比后一个元素大,则交换位置(升序情况)
     @Override
     protected void sort() {
         for (int end = array.length - 1; end > 0; end--) {

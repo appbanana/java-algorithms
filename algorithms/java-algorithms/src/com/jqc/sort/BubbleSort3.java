@@ -6,7 +6,7 @@ package com.jqc.sort;
  */
 public class BubbleSort3<T extends Comparable<T>> extends Sort<T> {
 
-//     冒泡排序 针对部分有序优化
+    // 改进方案三: 这个是在方案二的基础进一步改进, 主要针对数组部分有序的情况
 //    @Override
 //    protected void sort() {
 //        for (int end = array.length - 1; end > 0; end--) {
@@ -24,7 +24,7 @@ public class BubbleSort3<T extends Comparable<T>> extends Sort<T> {
 //    }
 
 
-//     冒泡排序 针对部分有序优化
+    // 改进方案三: 这个是在方案二的基础进一步改进, 主要针对数组部分有序的情况
     @Override
     protected void sort() {
         for (int end = array.length - 1; end > 0; end--) {

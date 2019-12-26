@@ -8,7 +8,7 @@ package com.jqc.sort;
 public class InsertionSort3<T extends Comparable<T>> extends Sort<T> {
 
     /**
-     * 插入排序 优化思路1：利用二分搜索先找到带插入元素的位置，然后把元素插入到找到的位置
+     * 思路: 优化方案二 采用二分搜索查找待插入的位置,相比上一种优化, 是减少了比较次数, 挪动次数还是一样的
      */
     @Override
     protected void sort() {
@@ -40,7 +40,7 @@ public class InsertionSort3<T extends Comparable<T>> extends Sort<T> {
         T element = array[index];
         while (begin < end) {
             int mid = (begin + end) >> 1;
-            if (element.compareTo(array[mid]) < 0) {
+            if (cmpElement(element, array[mid]) < 0) {
                 end = mid;
             }else {
                 begin = mid + 1;

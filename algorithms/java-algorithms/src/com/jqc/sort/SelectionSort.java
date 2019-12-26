@@ -5,6 +5,9 @@ package com.jqc.sort;
  * @date 2019/11/6
  */
 public class SelectionSort<T extends Comparable<T>> extends Sort<T> {
+    /**
+     * 选择排序的主要思想 每轮找出最大值,然后与末尾元素交换
+     */
     @Override
     protected void sort() {
         // 循环次数
