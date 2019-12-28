@@ -1,9 +1,11 @@
-package com.jqc.sort;
+package com.jqc;
 
+import com.jqc.sort.*;
 import com.jqc.tools.Asserts;
 import com.jqc.tools.Integers;
 
 import java.util.Arrays;
+
 /**
  * @author appbanana
  * 测试十大排序算法

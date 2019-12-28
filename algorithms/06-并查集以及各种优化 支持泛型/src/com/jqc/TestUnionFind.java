@@ -1,10 +1,15 @@
 package com.jqc;
+
 import com.jqc.tools.Asserts;
 import com.jqc.tools.Times;
 import com.jqc.union.*;
 
+/**
+ * @author appbanana
+ * @date 2019/12/28
+ */
+public class TestUnionFind {
 
-public class Main {
     static final int count = 10_0000;
 //    static final int count = 100;
 
