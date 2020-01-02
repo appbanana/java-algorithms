@@ -3,27 +3,10 @@ package com.jqc;
 import com.jqc.graph.Graph;
 import com.jqc.graph.ListGraph;
 import com.jqc.graph.Graph.VertexVisit;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import com.jqc.graph.Graph.EdgeInfo;
-import com.jqc.graph.Graph.WeightManager;
-import com.jqc.graph.Graph.PathInfo;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Main {
-
-    static WeightManager<Double> weightManager = new WeightManager<Double>() {
-        @Override
-        public int compare(Double w1, Double w2) {
-            return Double.compare(w1, w2);
-        }
-
-        @Override
-        public Double add(Double w1, Double w2) {
-            return w1 + w2;
-        }
-    };
 
     public static void main(String[] args) {
         // 测试图添加和删除
@@ -31,13 +14,7 @@ public class Main {
         // 测试广度遍历
 //        testBFS();
         // 测试深度遍历
-//        testDFS();
-        // 测试拓扑算法
-//        testTopo();
-        // 测试最小生成树
-//        testMst();
-        // 测试最短路径
-        testSp();
+        testDFS();
     }
 
     /**
@@ -112,37 +89,15 @@ public class Main {
             System.out.println(value);
             return false;
         });
+
     }
 
-    static void testTopo() {
-        // 对应img/topo.png图
-        Graph<Object, Double> graph = directedGraph(Data.TOPO);
-        List<Object> list = graph.topologicalSort();
-        System.out.println(list);
-    }
-
-    static void testMst() {
-        Graph<Object, Double> graph = undirectedGraph(Data.MST_01);
-        Set<EdgeInfo<Object, Double>> infos = graph.mst();
-        for (EdgeInfo<Object, Double> info : infos) {
-            System.out.println(info);
-        }
-    }
-
-    static void testSp() {
-        Graph<Object, Double> graph = directedGraph(Data.SP);
-        Map<Object, PathInfo<Object, Double>> sp = graph.shortestPath("A");
-        if (sp == null) return;
-        sp.forEach((Object v, PathInfo<Object, Double> path) -> {
-            System.out.println(v + " - " + path);
-        });
-    }
 
     /**
      * 有向图
      */
     private static Graph<Object, Double> directedGraph(Object[][] data) {
-        Graph<Object, Double> graph = new ListGraph<>(weightManager);
+        Graph<Object, Double> graph = new ListGraph<>();
         for (Object[] edge : data) {
             if (edge.length == 1) {
                 graph.addVertex(edge[0]);
@@ -162,7 +117,7 @@ public class Main {
      * @return
      */
     private static Graph<Object, Double> undirectedGraph(Object[][] data) {
-        Graph<Object, Double> graph = new ListGraph<>(weightManager);
+        Graph<Object, Double> graph = new ListGraph<>();
         for (Object[] edge : data) {
             if (edge.length == 1) {
                 graph.addVertex(edge[0]);
